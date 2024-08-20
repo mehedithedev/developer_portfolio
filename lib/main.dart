@@ -11,8 +11,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const ProfilePage(),
-      title: 'Mehedi Hasan',
+      home: ProfilePage(),
+      title: 'Developer Title',
       theme: ThemeData(
         primarySwatch: Colors.teal,
         scaffoldBackgroundColor: Colors.grey[100],
@@ -32,11 +32,6 @@ class MainApp extends StatelessWidget {
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
-  @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
   Future<void> _launchURL(Uri url) async {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
@@ -46,23 +41,42 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Developer Portfolio'),
+        title: Text('Developer Profile'),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Center(
-          child: ElevatedButton(
-            onPressed: (null),
-            child: CircleAvatar(
-              radius: 90,
-              backgroundImage: AssetImage('assets/images/IMG_0844.HEIC'),
+      body: Padding(
+        padding: const EdgeInsets.all(38.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(148),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    blurRadius: 12,
+                    spreadRadius: 2,
+                    offset: Offset(4, 4),
+                  ),
+                ],
+              ),
+              child: Transform.scale(
+                scale: 1.2,
+                child: CircleAvatar(
+                  radius: 90,
+                  backgroundImage: AssetImage('assets/images/mehedi.jpeg'),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
