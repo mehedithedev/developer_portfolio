@@ -11,7 +11,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ProfilePage(),
+      home: const ProfilePage(),
       title: 'Developer Title',
       theme: ThemeData(
         primarySwatch: Colors.teal,
@@ -32,6 +32,11 @@ class MainApp extends StatelessWidget {
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   Future<void> _launchURL(Uri url) async {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
@@ -41,17 +46,14 @@ class ProfilePage extends StatefulWidget {
   }
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber,
       appBar: AppBar(
-        title: Text('Developer Profile'),
+        title: const Text('Developer Profile'),
       ),
       body: Container(
+        // color: Colors.blue,
         child: Column(
           children: [
             Row(
@@ -60,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Container(
                   height: 200,
                   width: 200,
-                  margin: EdgeInsets.only(top: 100),
+                  margin: const EdgeInsets.only(top: 100),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(148),
                     boxShadow: [
@@ -68,13 +70,13 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.black.withOpacity(0.3),
                         blurRadius: 20,
                         spreadRadius: 70,
-                        offset: Offset(4, 4),
+                        offset: const Offset(4, 4),
                       ),
                     ],
                   ),
                   child: Transform.scale(
                     scale: 1.7,
-                    child: CircleAvatar(
+                    child: const CircleAvatar(
                       radius: 90,
                       backgroundImage: AssetImage('assets/images/tokyo.jpg'),
                     ),
@@ -82,13 +84,48 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 200,
             ),
-            Text(
-              '''Flutter developer with experience in building beautiful and performant mobile appps
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                IconButton(
+                  onPressed: () {
+                    _launchURL(
+                        Uri(scheme: 'mailto', path: 'mehedithedev@icloud.com'));
+                  },
+                  icon: const Icon(Icons.email),
+                  iconSize: 60,
+                ),
+                IconButton(
+                  onPressed: () {
+                    _launchURL(Uri.parse('https://www.google.com'));
+                  },
+                  icon: const Icon(Icons.web),
+                  iconSize: 60,
+                ),
+                IconButton(
+                  onPressed: () {
+                    _launchURL(Uri.parse('https://www.facebook.com'));
+                  },
+                  icon: const Icon(Icons.facebook_rounded),
+                  iconSize: 60,
+                ),
+                IconButton(
+                  onPressed: () {
+                    _launchURL(Uri.parse('https://www.github.com'));
+                  },
+                  icon: const Icon(Icons.code),
+                  iconSize: 60,
+                ),
+                // IconButton(onPressed: onPressed, icon: icon)
+              ],
+            ),
+            const Text(
+              '''Flutter developer with experience in building beautiful and performant mobile apps
               ''',
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(fontSize: 25),
               textAlign: TextAlign.center,
             ),
           ],
